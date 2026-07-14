@@ -1,0 +1,16 @@
+workflows:
+  android-release:
+    name: Android Release Build
+    environment:
+      java: 17
+    scripts:
+      - name: Set up build environment
+        script: |
+          # Jeśli brak skryptu gradlew, chmura użyje systemowego polecenia gradle
+          gradle wrapper
+      - name: Build release APK
+        script: |
+          cd app
+          gradle assembleRelease
+    artifacts:
+      - app/build/outputs/apk/release/*.apk
